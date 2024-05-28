@@ -15,4 +15,3 @@ for array in arraies:
         list_l.append('\n')
         sys.stdout.write(' '.join(str(l2) for l2 in list_l))
     print('')
-    
