@@ -12,11 +12,9 @@ def check(i):
     else:
         return str(i)
 
-i = 1
-while True:
-    if array[0] == check(i) and array[1] == check(i+1) and array[2] == check(i+2):
-        print(check(i+3))
-        exit()
-    else:
-        i += 1
-    
+for i in range(3):
+    if array[i].isdigit():
+        temp = int(array[i]) + 3-i
+        break
+
+print(check(temp))
