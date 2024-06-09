@@ -4,7 +4,7 @@ T, P = map(int, input().strip().split())
 
 tshirt = 0
 for s in size_list:
-    if s < T:
+    if 0< s < T:
         tshirt += 1
     if s >= T:
         if s % T == 0:
