@@ -5,14 +5,15 @@ sys.setrecursionlimit(100001)
 def dfs(x, prefer, visited, finished):
     if finished[x]:
         return 0
-    if visited[x]:
+    if visited[x]: # 이미 방문 -> 사이클 끝
         cycle_size = 1
         curr = prefer[x]
-        while curr != x:
+        while curr != x: # 같은 거 나올 때 까지 사이클 길이 세기
             cycle_size += 1
             curr = prefer[curr]
         return cycle_size
 
+    # 방문 안한 경우
     visited[x] = True
     cycle_size = dfs(prefer[x], prefer, visited, finished)
     finished[x] = True
