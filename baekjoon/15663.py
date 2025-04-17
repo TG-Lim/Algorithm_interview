@@ -1,18 +1,15 @@
-# Silver 2
-from itertools import permutations
 N, M = map(int, input().strip().split())
 array = list(map(int, input().strip().split()))
+array.sort()  # 사전 순 정렬 보장
 
-permutation = permutations(range(N), M)
+from itertools import permutations
 
-temp = set()
+# 중복 제거를 위해 set 사용
+result = set(permutations(array, M))
 
-for comb in permutation:
-    temp2 = []
-    for c in comb:
-        temp2.append(array[c])
-    temp2.sort()
-    if temp2 not in temp:
-        temp.add(temp2)
+# 사전 순 정렬
+result = sorted(result)
 
-print(temp)
+# 출력
+for perm in result:
+    print(' '.join(map(str, perm)))
