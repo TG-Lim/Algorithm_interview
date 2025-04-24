@@ -12,20 +12,14 @@ array.sort()
 
 h = []
 
-answer = -1
+heapq.heappush(h, array[0][1])
 
-for s, t in array:
-    if not h:
-        heapq.heappush(h, t)
-        answer = 1
-        continue
+for i in range(1, N):
+    s, t = array[i]
 
-    if h[0] <= s: # h[0]: 강의 종료시간 중 가장 빨리 끝나는 시간. 수업 더 놓을 수 있음
-        h.pop(0)
-        heapq.heappush(h, t)
-    else:
-        heapq.heappush(h, t)
+    if h[0] <= s:
+        heapq.heappop(h)
     
-    answer = max(answer, len(h))
+    heapq.heappush(h, t)
 
-print(answer)
+print(len(h))
