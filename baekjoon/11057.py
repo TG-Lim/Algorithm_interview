@@ -1,17 +1,14 @@
-import sys
-input = sys.stdin.readline
-
 N = int(input())
+dp = [[0]*10 for _ in range(N+1)]
 
-if N == 1: # 0도 포함
-    print(10)
-    exit()
+for j in range(10):
+    dp[1][j] = 1
 
-# dp[i][j]: 문자열 길이가 i 이고 제일 끝 자리 수가 j 일때 개수
+for i in range(2, N+1):
+    for j in range(0, 10):
+        for k in range(j+1):
+            dp[i][j] += dp[i-1][j-k]
 
-dp = [[1]*10 for _ in range(N+1)]
-for n in range(2, N+1):
-    for i in range(1, 10):
-        dp[n][i] = sum(dp[n-1][1:i+1])
+        dp[i][j] = dp[i][j]
 
-print(dp)
+print(sum(dp[N]) % 10007)

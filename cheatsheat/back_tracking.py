@@ -16,30 +16,28 @@ def combination(array, r):
     backtracking(0, [])
     return result
 
-def permuatation(array, r):
+def permutation(array, r):
     result = []
     used = [False]*len(array)
-
-    def backtrack(perm):
+    def backtracking(perm):
         if len(perm) == r:
             result.append(perm[:])
             return
         
         for i in range(len(array)):
             if not used[i]:
-                perm.append(array[i])
+                perm.append(i)
                 used[i] = True
-
-                backtrack(perm)
+                
+                backtracking(perm)
 
                 perm.pop()
                 used[i] = False
-    
-    backtrack([])
+        
+    backtracking([])
     return result
-
 
 if __name__ == '__main__':
     array = [1, 2, 3, 4, 5]
     print(combination(array, 3))
-    print(permuatation(array, 2))
+    print(permutation(array, 3))
