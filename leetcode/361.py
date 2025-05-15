@@ -9,49 +9,53 @@ class Solution:
         right = [[0]*n for _ in range(m)]
         left = [[0]*n for _ in range(m)]
 
-        ## up
-        for j in range(n):
-            if grid[0][j] == 'E':
-                up[0][j] = 1
-            else:
-                up[0][j] = 0
-        
+        # up
         for i in range(1, m):
             for j in range(n):
-                if grid[i][j] == 'E':
+                if grid[i-1][j] == 'E':
                     up[i][j] = up[i-1][j] + 1
-                
-                elif grid[i][j] == 'W':
+                elif grid[i-1][j] == 'W':
                     up[i][j] = 0 # 초기화
-                
                 else:
                     up[i][j] = up[i-1][j]
         
-        ## down
-        for j in range(n):
-            if grid[-1][j] == 'E':
-                down[-1][j] = 1
-            else:
-                down[-1][j] = 0
-        
+        # down
         for i in range(m-2, -1, -1):
             for j in range(n):
-                if grid[i][j] == 'E':
+                if grid[i+1][j] == 'E':
                     down[i][j] = down[i+1][j] + 1
-                elif grid[i][j] == 'W':
+                elif grid[i+1][j] == 'W':
                     down[i][j] = 0
                 else:
                     down[i][j] = down[i+1][j]
 
-        ## left
-        for i in range(m):
-            if grid[i][0] == 'E':
-                left[i][0] = 1
-        
+        # left
         for j in range(1, n):
             for i in range(m):
-                if grid[i][j] == 'E':
-                    pass      
+                if grid[i][j-1] == 'E':
+                    left[i][j] = left[i][j-1] + 1
+                elif grid[i][j-1] == 'W':
+                    left[i][j] = 0
+                else:
+                    left[i][j] = left[i][j-1]
+
+        ## right
+        for j in range(n-2, -1, -1):
+            for i in range(m):
+                if grid[i][j+1] == 'E':
+                    right[i][j] = right[i][j+1] + 1
+                elif grid[i][j+1] == 'W':
+                    right[i][j] = 0
+                else:
+                    right[i][j] = right[i][j+1]
+        
+        answer = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == '0':
+                    answer = max(answer, up[i][j] + down[i][j] + left[i][j] + right[i][j])
+        
+        return answer
 
 if __name__ == '__main__':
     cases = [
