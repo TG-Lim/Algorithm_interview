@@ -33,10 +33,10 @@ def decompress(start, end):
             else:
                 total_length += 1
                 i += 1
-        elif string[i] == '(':
-            i += 1
-        elif string[i] == ')':
-            i += 1
+        # elif string[i] == '(':
+        #     i += 1
+        # elif string[i] == ')':
+        #     i += 1
 
     return total_length
 print(decompress(0, len(string)))
