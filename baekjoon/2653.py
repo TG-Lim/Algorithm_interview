@@ -39,6 +39,15 @@ for i in range(num_groups):
                 if array[node][other_node] == 0: # 다른 그룹에서 좋아하는 사람 있음 -> 안정된 집단이 아님
                     print(0)
                     exit()
+                    
+for i in range(num_groups):
+    for node in groups[i]:
+        for other_node in groups[i]:
+            if node == other_node:
+                continue
+            if array[node][other_node] == 1: # 같은 그룹인데 싫어함
+                print(0)
+                exit()
 
 groups.sort(key=lambda x: (x[0]))
 
